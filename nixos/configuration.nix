@@ -109,6 +109,9 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -149,8 +152,8 @@
   };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "ricky";
+  # services.displayManager.autoLogin.enable = true;
+  # services.displayManager.autoLogin.user = "ricky";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -164,7 +167,8 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-	vim
+    neovim
+    inputs.swww.packages.${pkgs.system}.swww
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

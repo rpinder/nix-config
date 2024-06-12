@@ -6,7 +6,15 @@
   config,
   pkgs,
   ...
-}: {
+}:
+let
+  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+    ${pkgs.swww}/bin/swww init &
+    sleep 1
+    ${pkgs.swww}/bin/swww img ~/wallpaper.jpg &
+    '';
+in
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -54,6 +62,14 @@
     enable = true;
     userName = "Ricky Pinder";
     userEmail = "pinderrr@outlook.com";
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+
+    settings = {
+      exec-once = ''${startupScript}/bin/start'';
+    };
   };
 
   # Nicely reload system units when changing configs
