@@ -66,10 +66,18 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+    
+    extraConfig = builtins.readFile ./dotfiles/hyprland/hyprland.conf;
 
     settings = {
       exec-once = ''${startupScript}/bin/start'';
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
   };
 
   # Nicely reload system units when changing configs
