@@ -1,0 +1,1 @@
+sudo nixos-rebuild switch --flake "$HOME/nix-config?submodules=1"
