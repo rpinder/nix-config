@@ -19,6 +19,7 @@ in
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
+    inputs.ags.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
@@ -80,9 +81,23 @@ in
     vimAlias = true;
   };
 
-  # Nicely reload system units when changing configs
+  programs.ags = {
+    enable = true;
+
+    # null or path, leave as null if you don't want hm to manage the config
+    configDir = ../ags;
+
+    # additional packages to add to gjs's runtime
+    extraPackages = with pkgs; [
+      gtksourceview
+      webkitgtk
+      accountsservice
+    ];
+  };
+
+# Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+# https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
 }
