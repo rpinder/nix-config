@@ -168,6 +168,7 @@
     wofi
     wlr-randr
     htop
+    gnome.gnome-tweaks
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
