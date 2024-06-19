@@ -10,7 +10,7 @@
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     ${pkgs.swww}/bin/swww init &
-    ags -c ~/nixos-config/home-manager/dotfiles/ags/config.js &
+    ags -c ~/nix-config/home-manager/dotfiles/ags/config.js &
     sleep 1
     ${pkgs.swww}/bin/swww img ~/wallpaper.jpg &
     '';
